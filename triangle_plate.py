@@ -23,12 +23,12 @@ class TrianglePlate:
             if number_of_biscuit + current_biscuit_box[0] > i:
                 number_of_bricks_exceeded = number_of_biscuit + current_biscuit_box.quantity - i
                 current_biscuit_box.type = new_brick_type
-                current_biscuit_box.quantity = number_of_biscuit + current_biscuit_box.quantity
+                current_biscuit_box.quantity = i
                 # TODO is this value reference? if no, do not need to assign back
                 self.grids[i] = current_biscuit_box
                 self.calculate_penalty(number_of_bricks_exceeded)
             else:
-                current_biscuit_box.quantity = i
+                current_biscuit_box.quantity = number_of_biscuit + current_biscuit_box.quantity
                 # TODO is this value reference? if no, do not need to assign back
                 self.grids[i] = current_biscuit_box
         else:
