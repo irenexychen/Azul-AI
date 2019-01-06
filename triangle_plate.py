@@ -1,5 +1,5 @@
 from tile_type import TileType
-from title import Tile
+from tile import Tile
 
 
 class TrianglePlate:
