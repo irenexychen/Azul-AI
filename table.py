@@ -1,30 +1,30 @@
-from biscuit_type import BiscuitType
+from tile_type import TileType
 
 
 class Table:
-    bowls = []
-    pan = []
+    round_boxes = []
+    pool = []
 
     def __init__(self):
         self.reset()
 
     def reset(self):
-        self.bowls = [[BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE],
-                      [BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE],
-                      [BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE],
-                      [BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE],
-                      [BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE, BiscuitType.NONE]]
+        self.round_boxes = [[TileType.NONE, TileType.NONE, TileType.NONE, TileType.NONE, TileType.NONE],
+                            [TileType.NONE, TileType.NONE, TileType.NONE, TileType.NONE, TileType.NONE],
+                            [TileType.NONE, TileType.NONE, TileType.NONE, TileType.NONE, TileType.NONE],
+                            [TileType.NONE, TileType.NONE, TileType.NONE, TileType.NONE, TileType.NONE],
+                            [TileType.NONE, TileType.NONE, TileType.NONE, TileType.NONE, TileType.NONE]]
 
-        self.pan = {BiscuitType.BLUE: 0, BiscuitType.BLACK: 0, BiscuitType.RED: 0, BiscuitType.WHITE: 0,
-                    BiscuitType.YELLOW: 0}
+        self.pool = {TileType.BLUE: 0, TileType.BLACK: 0, TileType.RED: 0, TileType.WHITE: 0,
+                     TileType.YELLOW: 0}
 
-    def fill_bowls(self):
+    def fill_boxes(self):
         for i in range(5):
             # TODO to fill in random
-            self.bowls[i] = []
+            self.round_boxes[i] = []
             pass
 
-    def fetch_biscuit(self, i, biscuit_type_to_fetch: BiscuitType, number_to_fetch):
+    def fetch_tile(self, i, tile_type_fetched: TileType, fetched_number):
         # TODO remove from bowls
-        # TODO add to pan
+        # TODO add to pool
         pass

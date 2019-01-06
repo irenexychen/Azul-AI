@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class BiscuitType(Enum):
+class TileType(Enum):
     NONE = 0
     BLUE = 1
     YELLOW = 2

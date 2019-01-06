@@ -1,5 +1,5 @@
-from biscuit_type import BiscuitType
-from biscuit_box import BiscuitBox
+from tile_type import TileType
+from title import Tile
 
 
 class Board:
@@ -10,36 +10,36 @@ class Board:
         self.reset()
 
     def reset(self):
-        self.grids = [[BiscuitBox(BiscuitType.BLUE, 0),
-                       BiscuitBox(BiscuitType.YELLOW, 0),
-                       BiscuitBox(BiscuitType.RED, 0),
-                       BiscuitBox(BiscuitType.BLACK, 0),
-                       BiscuitBox(BiscuitType.WHITE, 0)],
-                      [BiscuitBox(BiscuitType.WHITE, 0),
-                       BiscuitBox(BiscuitType.BLUE, 0),
-                       BiscuitBox(BiscuitType.YELLOW, 0),
-                       BiscuitBox(BiscuitType.RED, 0),
-                       BiscuitBox(BiscuitType.BLACK, 0)],
-                      [BiscuitBox(BiscuitType.BLACK, 0),
-                       BiscuitBox(BiscuitType.WHITE, 0),
-                       BiscuitBox(BiscuitType.BLUE, 0),
-                       BiscuitBox(BiscuitType.YELLOW, 0),
-                       BiscuitBox(BiscuitType.RED, 0)],
-                      [BiscuitBox(BiscuitType.RED, 0),
-                       BiscuitBox(BiscuitType.BLACK, 0),
-                       BiscuitBox(BiscuitType.WHITE, 0),
-                       BiscuitBox(BiscuitType.BLUE, 0),
-                       BiscuitBox(BiscuitType.YELLOW, 0)],
-                      [BiscuitBox(BiscuitType.YELLOW, 0),
-                       BiscuitBox(BiscuitType.RED, 0),
-                       BiscuitBox(BiscuitType.BLACK, 0),
-                       BiscuitBox(BiscuitType.WHITE, 0),
-                       BiscuitBox(BiscuitType.BLUE, 0)]]
+        self.grids = [[Tile(TileType.BLUE, 0),
+                       Tile(TileType.YELLOW, 0),
+                       Tile(TileType.RED, 0),
+                       Tile(TileType.BLACK, 0),
+                       Tile(TileType.WHITE, 0)],
+                      [Tile(TileType.WHITE, 0),
+                       Tile(TileType.BLUE, 0),
+                       Tile(TileType.YELLOW, 0),
+                       Tile(TileType.RED, 0),
+                       Tile(TileType.BLACK, 0)],
+                      [Tile(TileType.BLACK, 0),
+                       Tile(TileType.WHITE, 0),
+                       Tile(TileType.BLUE, 0),
+                       Tile(TileType.YELLOW, 0),
+                       Tile(TileType.RED, 0)],
+                      [Tile(TileType.RED, 0),
+                       Tile(TileType.BLACK, 0),
+                       Tile(TileType.WHITE, 0),
+                       Tile(TileType.BLUE, 0),
+                       Tile(TileType.YELLOW, 0)],
+                      [Tile(TileType.YELLOW, 0),
+                       Tile(TileType.RED, 0),
+                       Tile(TileType.BLACK, 0),
+                       Tile(TileType.WHITE, 0),
+                       Tile(TileType.BLUE, 0)]]
 
     def get_scores(self):
         return self.total_scores
 
-    def put_into_board(self, i, new_brick_type: BiscuitType):
+    def put_into_board(self, i, new_brick_type: TileType):
         for biscuit in self.grids[i]:
             if biscuit.type == new_brick_type and biscuit.quantity == 0:
                 # TODO verify if it is by-reference
