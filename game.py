@@ -21,7 +21,8 @@ class Game:
             if self.az_table.has_tile():
                 for player in self.players:
                     if self.az_table.has_tile():
-                        player.play()
+                        used_tile = player.play()
+                        self.az_table.fetch_tile(used_tile[0], used_tile[1], used_tile[2])
                     else:
                         break
 
@@ -31,8 +32,10 @@ class Game:
             if not self.last_round:
                 self.az_table.fill_boxes()
 
+            for player in self.players:
+                player.move_tile_to_board()
+
         for player in self.players:
-            player.move_tile_to_board()
             player.calculate_score_after_round()
             if player.scores > self.maximum_scores:
                 self.maximum_scores = player.scores

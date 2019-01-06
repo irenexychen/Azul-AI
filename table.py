@@ -25,7 +25,7 @@ class Table:
             pass
 
     def fetch_tile(self, i, tile_type_fetched: TileType, fetched_number):
-        # TODO remove from bowls
+        # TODO remove from boxes
         # TODO add to pool
         pass
 

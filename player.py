@@ -18,7 +18,9 @@ class Player:
         amount = input("How many you want to get?")
         row = input("Which row you want to put?")
         # TODO change color to enum TileType
+
         self.az_plate.add(row, color, amount)
+        return row, color, amount
 
     def is_last_round(self):
         return self.az_board.has_one_full_row()

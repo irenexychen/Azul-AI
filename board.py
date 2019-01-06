@@ -40,10 +40,10 @@ class Board:
         return self.total_scores
 
     def put_into_board(self, i, new_brick_type: TileType):
-        for biscuit in self.grids[i]:
-            if biscuit.type == new_brick_type and biscuit.quantity == 0:
+        for tile in self.grids[i]:
+            if tile.type == new_brick_type and tile.quantity == 0:
                 # TODO verify if it is by-reference
-                biscuit.quantity = 1
+                tile.quantity = 1
                 break
 
     def calculate_scores(self):
