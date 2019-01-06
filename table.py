@@ -28,3 +28,7 @@ class Table:
         # TODO remove from bowls
         # TODO add to pool
         pass
+
+    def has_tile(self):
+        # TODO check tile both in boxes and pool
+        pass

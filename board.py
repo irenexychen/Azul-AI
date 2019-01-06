@@ -49,3 +49,7 @@ class Board:
     def calculate_scores(self):
         # TODO
         self.total_scores = 9
+
+    def has_one_full_row(self):
+        # TODO
+        pass
