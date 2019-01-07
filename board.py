@@ -4,7 +4,7 @@ from tile import Tile
 
 class Board:
     total_scores = 0
-    grids = [[], [], [], [], []]
+    grids = []
 
     def __init__(self):
         self.reset()
@@ -39,10 +39,9 @@ class Board:
     def get_scores(self):
         return self.total_scores
 
-    def put_into_board(self, i, new_brick_type: TileType):
+    def put_onto_board(self, i, new_brick_type: TileType):
         for tile in self.grids[i]:
             if tile.type == new_brick_type and tile.quantity == 0:
-                # TODO verify if it is by-reference
                 tile.quantity = 1
                 break
 

@@ -28,5 +28,6 @@ class Player:
     def move_tile_to_board(self):
         pass
 
-    def calculate_score_after_round(self):
-        pass
+    def calculate_scores_after_round(self):
+        # TODO calculate scores
+        self.az_plate.calculate_penalty()

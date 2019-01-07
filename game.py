@@ -36,7 +36,7 @@ class Game:
                 player.move_tile_to_board()
 
         for player in self.players:
-            player.calculate_score_after_round()
+            player.calculate_scores_after_round()
             if player.scores > self.maximum_scores:
                 self.maximum_scores = player.scores
                 self.winner = player.name
