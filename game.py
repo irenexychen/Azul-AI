@@ -22,7 +22,7 @@ class Game:
                 for player in self.players:
                     if self.az_table.has_tile():
                         used_tile = player.play()
-                        self.az_table.fetch_tile(used_tile[0], used_tile[1], used_tile[2])
+                        self.az_table.move_tile_to_pool(used_tile[0], used_tile[1], used_tile[2])
                     else:
                         break
 

@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import IntEnum
 
 
-class TileType(Enum):
+class TileType(IntEnum):
     NONE = 0
     BLUE = 1
     YELLOW = 2

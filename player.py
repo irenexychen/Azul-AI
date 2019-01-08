@@ -1,5 +1,6 @@
 from board import Board
 from triangle_plate import TrianglePlate
+from tile_type import TileType
 
 
 class Player:
@@ -14,13 +15,18 @@ class Player:
         return self.scores
 
     def play(self):
-        color = input("What color you want to choose?")
-        amount = input("How many you want to get?")
+        color = input("What color you want to choose Blue, Yellow, Red, blacK or White?")
+        amount = int(input("How many you want to get?"))
         row = input("Which row you want to put?")
-        # TODO change color to enum TileType
-
-        self.az_plate.add(row, color, amount)
-        return row, color, amount
+        switcher = {
+            "B": TileType.BLUE,
+            "Y": TileType.YELLOW,
+            "R": TileType.RED,
+            "K": TileType.BLACK,
+            "W": TileType.WHITE
+        }
+        self.az_plate.add(row, switcher[color], amount)
+        return row, switcher[color], amount
 
     def is_last_round(self):
         return self.az_board.has_one_full_row()
