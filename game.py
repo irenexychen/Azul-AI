@@ -10,11 +10,12 @@ class Game:
     maximum_scores = 0
 
     def __init__(self):
-        self.az_player = Player()
-        self.ai_player = AiPlayer()
+        self.az_table = Table()
+        self.az_player = Player(self.az_table)
+        self.ai_player = AiPlayer(self.az_table)
         self.players.append(self.az_player)
         self.players.append(self.ai_player)
-        self.az_table = Table()
+        self.ai_player.get_opponents(self.players)
 
     def play_game(self):
         while not self.last_round:
@@ -22,7 +23,7 @@ class Game:
                 for player in self.players:
                     if self.az_table.has_tile():
                         used_tile = player.play()
-                        self.az_table.move_tile_to_pool(used_tile[0], used_tile[1], used_tile[2])
+                        self.az_table.move_unused_tile_into_pool(used_tile[0], used_tile[1], used_tile[2])
                     else:
                         break
 

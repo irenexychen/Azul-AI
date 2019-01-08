@@ -13,7 +13,7 @@ class TestTable(TestCase):
                                        [0, 0, 0, 0],
                                        [0, 0, 0, 0]]
 
-        self.game_table.move_tile_to_pool(2, TileType.YELLOW, 2)
+        self.game_table.move_unused_tile_into_pool(2, TileType.YELLOW, 2)
 
         assert self.game_table.round_boxes[2][1] == int(TileType.NONE)
         assert self.game_table.round_boxes[2][2] == int(TileType.NONE)

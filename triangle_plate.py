@@ -48,3 +48,15 @@ class TrianglePlate:
         self.penalty_points = 0
         for i in range(len(self.penalty_bench)):
             self.penalty_points = self.penalty_points + self.penalty_rule[i]
+
+    def get_empty_row(self):
+        for row in range(1, 5):
+            if self.grids[row].quantity == 0:
+                return row
+        return -1
+
+    def get_partial_filled_row(self):
+        for row in range(1, 5):
+            if self.grids[row].quantity < row:
+                return row
+        return -1

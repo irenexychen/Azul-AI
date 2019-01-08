@@ -1,15 +1,20 @@
 from board import Board
 from triangle_plate import TrianglePlate
 from tile_type import TileType
+from table import Table
+import uuid
 
 
 class Player:
     name = "guest"
+    id = ""
     scores = 0
 
-    def __init__(self):
+    def __init__(self, table: Table):
+        self.id = str(uuid.uuid4())
         self.az_board = Board()
         self.az_plate = TrianglePlate()
+        self.az_table = table
 
     def round_scores(self):
         return self.scores
@@ -23,7 +28,12 @@ class Player:
             "Y": TileType.YELLOW,
             "R": TileType.RED,
             "K": TileType.BLACK,
-            "W": TileType.WHITE
+            "W": TileType.WHITE,
+            "b": TileType.BLUE,
+            "y": TileType.YELLOW,
+            "r": TileType.RED,
+            "k": TileType.BLACK,
+            "w": TileType.WHITE
         }
         self.az_plate.add(row, switcher[color], amount)
         return row, switcher[color], amount
