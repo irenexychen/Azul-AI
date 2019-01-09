@@ -4,24 +4,52 @@ from tile_type import TileType
 
 
 class TestTable(TestCase):
-    game_table = Table()
 
-    def test_flush_tile(self):
-        self.game_table.round_boxes = [[0, 0, 0, 0],
-                                       [0, 0, 0, 0],
-                                       [0, int(TileType.YELLOW), int(TileType.YELLOW), int(TileType.YELLOW)],
-                                       [0, 0, 0, 0],
-                                       [0, 0, 0, 0]]
+    def test_fetch_tile(self):
+        game_table = Table()
+        game_table.round_boxes.clear()
+        game_table.round_boxes = [[0, 0, 0, 0],
+                                  [0, 0, 0, 0],
+                                  [int(TileType.RED), int(TileType.YELLOW), int(TileType.YELLOW),
+                                   int(TileType.YELLOW)],
+                                  [0, 0, 0, 0],
+                                  [0, 0, 0, 0]]
 
-        self.game_table.move_unused_tile_into_pool(2, TileType.YELLOW, 2)
+        game_table.round_boxes_by_number.clear()
+        game_table.round_boxes_by_number = [{4: [], 3: [], 2: [], 1: []},
+                                            {4: [], 3: [], 2: [], 1: []},
+                                            {4: [], 3: [int(TileType.YELLOW)], 2: [], 1: [int(TileType.RED)]},
+                                            {4: [], 3: [], 2: [], 1: []},
+                                            {4: [], 3: [], 2: [], 1: []}]
 
-        assert self.game_table.round_boxes[2][1] == int(TileType.NONE)
-        assert self.game_table.round_boxes[2][2] == int(TileType.NONE)
-        assert self.game_table.round_boxes[2][3] == int(TileType.NONE)
-        assert self.game_table.pool[TileType.YELLOW] == 1
-        assert not self.game_table.has_tile()
+        game_table.round_boxes_by_color.clear()
+        game_table.round_boxes_by_color = [
+            {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0, int(TileType.WHITE): 0,
+             int(TileType.YELLOW): 0},
+            {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0, int(TileType.WHITE): 0,
+             int(TileType.YELLOW): 0},
+            {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 1, int(TileType.WHITE): 0,
+             int(TileType.YELLOW): 3},
+            {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0, int(TileType.WHITE): 0,
+             int(TileType.YELLOW): 0},
+            {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0, int(TileType.WHITE): 0,
+             int(TileType.YELLOW): 0}, ]
 
+        game_table.fetch_tiles(2, TileType.YELLOW, 2)
 
-def test_fill_boxes(self):
-    self.game_table.fill_boxes()
-    assert self.game_table.has_tile()
+        self.assertEqual(game_table.round_boxes[2][0], int(TileType.NONE))
+        self.assertEqual(game_table.round_boxes[2][1], int(TileType.NONE))
+        self.assertEqual(game_table.round_boxes[2][2], int(TileType.NONE))
+        self.assertEqual(game_table.round_boxes[2][3], int(TileType.NONE))
+
+        self.assertLess(len(game_table.round_boxes_by_number[2][1]), 1)
+        self.assertEqual(game_table.round_boxes_by_color[2][int(TileType.RED)], 0)
+
+        self.assertEqual(game_table.pool[TileType.YELLOW], 1)
+
+        self.assertIs(game_table.has_tile(), True)
+
+    def test_fill_boxes(self):
+        game_table = Table()
+        game_table.fill_boxes()
+        self.assertIs(game_table.has_tile(), True)

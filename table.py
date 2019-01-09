@@ -46,10 +46,8 @@ class Table:
                      TileType.YELLOW: 0}
 
     def fill_boxes(self):
-
         for i in range(5):
             tiles = []
-            #
             number_of_tiles_by_colors = {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0,
                                          int(TileType.WHITE): 0, int(TileType.YELLOW): 0}
             for k in range(4):
@@ -68,20 +66,17 @@ class Table:
                     sorted_number_by_color.append(color)
             self.round_boxes_by_number.append({number_to_sort: sorted_number_by_color})
 
-    def move_unused_tile_into_pool(self, i, tile_type_fetched: TileType, fetched_number):
-        tiles_to_be_flushed = 0
+    def fetch_tiles(self, i, tile_type_to_fetch: TileType, number_to_fetch):
+        number_in_round_box = self.round_boxes_by_color[i][int(tile_type_to_fetch)]
         for j in range(4):
-            if self.round_boxes[i][j] == int(tile_type_fetched):
-                if tiles_to_be_flushed < fetched_number:
-                    tiles_to_be_flushed += 1
-                else:
-                    tiles_to_be_flushed = 0
-                # TODO throw exception
-        if tiles_to_be_flushed > 0:
-            for j in range(4):
-                self.round_boxes[i][j] = int(TileType.NONE)
-            self.pool[tile_type_fetched] += fetched_number - tiles_to_be_flushed
-            # TODO sort tiles again
+            self.round_boxes[i][j] = int(TileType.NONE)
+
+        self.round_boxes_by_color[i] = {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0,
+                                        int(TileType.WHITE): 0, int(TileType.YELLOW): 0}
+
+        self.round_boxes_by_number[i] = {4: [], 3: [], 2: [], 1: []}
+
+        self.pool[tile_type_to_fetch] += number_in_round_box - number_to_fetch
 
     def has_tile(self):
         for i in range(5):

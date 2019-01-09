@@ -22,7 +22,7 @@ class Player:
     def play(self):
         color = input("What color you want to choose Blue, Yellow, Red, blacK or White?")
         amount = int(input("How many you want to get?"))
-        row = input("Which row you want to put?")
+        row = int(input("Which row you want to put?"))
         switcher = {
             "B": TileType.BLUE,
             "Y": TileType.YELLOW,

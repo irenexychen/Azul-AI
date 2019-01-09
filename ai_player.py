@@ -19,7 +19,7 @@ class AiPlayer(Player):
         if row == -1:
             row = self.az_plate.get_partial_filled_row()
         # Find tiles
-        tiles = self.get_most_tiles()
+        tiles = self.get_the_most_tiles()
         # TODO if not find a row, set 9?
         return row, tiles
 

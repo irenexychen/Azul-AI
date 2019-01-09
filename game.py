@@ -18,12 +18,14 @@ class Game:
         self.ai_player.get_opponents(self.players)
 
     def play_game(self):
+        self.az_table.fill_boxes()
+        self.print_table()
         while not self.last_round:
             if self.az_table.has_tile():
                 for player in self.players:
                     if self.az_table.has_tile():
                         used_tile = player.play()
-                        self.az_table.move_unused_tile_into_pool(used_tile[0], used_tile[1], used_tile[2])
+                        self.az_table.fetch_tiles(used_tile[0], used_tile[1], used_tile[2])
                     else:
                         break
 
@@ -43,3 +45,12 @@ class Game:
                 self.winner = player.name
 
         print("The winner is %s" % self.winner)
+
+    def print_table(self):
+        for box_number in range(5):
+            print(" Tiles %s" % self.az_table.round_boxes[box_number])
+
+
+if __name__ == '__main__':
+    az_game = Game()
+    az_game.play_game()
