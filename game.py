@@ -48,7 +48,9 @@ class Game:
 
     def print_table(self):
         for box_number in range(5):
-            print(" Tiles %s" % self.az_table.round_boxes[box_number])
+            for tile_number in range(4):
+                tiles = " %s" % self.az_table.round_boxes[box_number][tile_number]
+            print(tiles)
 
 
 if __name__ == '__main__':
