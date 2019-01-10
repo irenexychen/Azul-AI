@@ -47,9 +47,17 @@ class Game:
         print("The winner is %s" % self.winner)
 
     def print_table(self):
+        switcher = {
+            1: "B",
+            2: "Y",
+            3: "R",
+            4: "K",
+            5: "W",
+        }
         for box_number in range(5):
+            tiles = ""
             for tile_number in range(4):
-                tiles = " %s" % self.az_table.round_boxes[box_number][tile_number]
+                tiles += " %s" % switcher[self.az_table.round_boxes[box_number][tile_number]]
             print(tiles)
 
 
