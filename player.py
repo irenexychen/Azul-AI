@@ -20,9 +20,6 @@ class Player:
         return self.scores
 
     def play(self):
-        color = input("What color you want to choose Blue, Yellow, Red, blacK or White?")
-        amount = int(input("How many you want to get?"))
-        row = int(input("Which row you want to put?"))
         switcher = {
             "B": TileType.BLUE,
             "Y": TileType.YELLOW,
@@ -35,13 +32,20 @@ class Player:
             "k": TileType.BLACK,
             "w": TileType.WHITE
         }
-        self.az_plate.add(row, switcher[color], amount)
-        return row, switcher[color], amount
+        source_row = int(input("From which row you want to take tiles?"))
+        color = input("What color you want to choose, Blue, Yellow, Red, blacK or White?")
+        print("Box by color:", self.az_table.round_boxes_by_color[source_row])
+        amount = self.az_table.round_boxes_by_color[source_row][int(switcher[color])]
+        print("You toke %d %s" % (amount, switcher[color]))
+        destination_row = int(input("Which row you want to put into?"))
+
+        self.az_plate.add(destination_row, switcher[color], amount)
+        return source_row, switcher[color], amount
 
     def is_last_round(self):
         return self.az_board.has_one_full_row()
 
-    def move_tile_to_board(self):
+    def move_tiles_to_board(self):
         pass
 
     def calculate_scores_after_round(self):

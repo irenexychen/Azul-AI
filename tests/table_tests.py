@@ -7,7 +7,7 @@ class TestTable(TestCase):
 
     def test_fetch_tile(self):
         game_table = Table()
-        game_table.round_boxes.clear()
+        # game_table.round_boxes.clear()
         game_table.round_boxes = [[0, 0, 0, 0],
                                   [0, 0, 0, 0],
                                   [int(TileType.RED), int(TileType.YELLOW), int(TileType.YELLOW),
@@ -15,14 +15,14 @@ class TestTable(TestCase):
                                   [0, 0, 0, 0],
                                   [0, 0, 0, 0]]
 
-        game_table.round_boxes_by_number.clear()
+        # game_table.round_boxes_by_number.clear()
         game_table.round_boxes_by_number = [{4: [], 3: [], 2: [], 1: []},
                                             {4: [], 3: [], 2: [], 1: []},
                                             {4: [], 3: [int(TileType.YELLOW)], 2: [], 1: [int(TileType.RED)]},
                                             {4: [], 3: [], 2: [], 1: []},
                                             {4: [], 3: [], 2: [], 1: []}]
 
-        game_table.round_boxes_by_color.clear()
+        # game_table.round_boxes_by_color.clear()
         game_table.round_boxes_by_color = [
             {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0, int(TileType.WHITE): 0,
              int(TileType.YELLOW): 0},
@@ -35,7 +35,7 @@ class TestTable(TestCase):
             {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0, int(TileType.WHITE): 0,
              int(TileType.YELLOW): 0}, ]
 
-        game_table.fetch_tiles(2, TileType.YELLOW, 2)
+        game_table.adjust_fetched_tiles(2, TileType.YELLOW, 2)
 
         self.assertEqual(game_table.round_boxes[2][0], int(TileType.NONE))
         self.assertEqual(game_table.round_boxes[2][1], int(TileType.NONE))

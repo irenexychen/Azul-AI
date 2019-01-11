@@ -66,17 +66,17 @@ class Table:
                     sorted_number_by_color.append(color)
             self.round_boxes_by_number.append({number_to_sort: sorted_number_by_color})
 
-    def fetch_tiles(self, i, tile_type_to_fetch: TileType, number_to_fetch):
-        number_in_round_box = self.round_boxes_by_color[i][int(tile_type_to_fetch)]
+    def adjust_fetched_tiles(self, box_fetched, tile_type_fetched: TileType, number_fetched):
+        number_in_round_box = self.round_boxes_by_color[box_fetched][int(tile_type_fetched)]
         for j in range(4):
-            self.round_boxes[i][j] = int(TileType.NONE)
+            self.round_boxes[box_fetched][j] = int(TileType.NONE)
 
-        self.round_boxes_by_color[i] = {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0,
-                                        int(TileType.WHITE): 0, int(TileType.YELLOW): 0}
+        self.round_boxes_by_color[box_fetched] = {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0,
+                                                  int(TileType.WHITE): 0, int(TileType.YELLOW): 0}
 
-        self.round_boxes_by_number[i] = {4: [], 3: [], 2: [], 1: []}
+        self.round_boxes_by_number[box_fetched] = {4: [], 3: [], 2: [], 1: []}
 
-        self.pool[tile_type_to_fetch] += number_in_round_box - number_to_fetch
+        self.pool[tile_type_fetched] += number_in_round_box - number_fetched
 
     def has_tile(self):
         for i in range(5):

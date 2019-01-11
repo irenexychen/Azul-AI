@@ -19,15 +19,19 @@ class AiPlayer(Player):
         if row == -1:
             row = self.az_plate.get_partial_filled_row()
         # Find tiles
-        tiles = self.get_the_most_tiles()
+        tiles = self.get_most_tiles()
         # TODO if not find a row, set 9?
-        return row, tiles
+        return row, tiles[0], tiles[1]
 
-    def get_the_most_tiles(self):
-        color = 0
+    def get_most_tiles(self):
+        colors = []
         amount = 0
-        for number_of_tiles in range(5, 1, -1):
-            if self.az_table.round_boxes_by_number[number_of_tiles] > 0:
-                color = self.az_table.round_boxes_by_number[number_of_tiles][0]
-                amount = number_of_tiles
-        return color, amount
+        for number_of_tiles in range(4, 1, -1):
+            for k in range(5):
+                if len(self.az_table.round_boxes_by_number[k][number_of_tiles]) > 0:
+                    colors = self.az_table.round_boxes_by_number[k][number_of_tiles]
+                    amount = number_of_tiles
+                    break
+            if amount > 0:
+                break
+        return colors[0], amount

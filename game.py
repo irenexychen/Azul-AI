@@ -25,7 +25,7 @@ class Game:
                 for player in self.players:
                     if self.az_table.has_tile():
                         used_tile = player.play()
-                        self.az_table.fetch_tiles(used_tile[0], used_tile[1], used_tile[2])
+                        self.az_table.adjust_fetched_tiles(used_tile[0], used_tile[1], used_tile[2])
                     else:
                         break
 
@@ -36,7 +36,7 @@ class Game:
                 self.az_table.fill_boxes()
 
             for player in self.players:
-                player.move_tile_to_board()
+                player.move_tiles_to_board()
 
         for player in self.players:
             player.calculate_scores_after_round()
@@ -55,7 +55,7 @@ class Game:
             5: "W",
         }
         for box_number in range(5):
-            tiles = ""
+            tiles = " %d --- " % box_number
             for tile_number in range(4):
                 tiles += " %s" % switcher[self.az_table.round_boxes[box_number][tile_number]]
             print(tiles)

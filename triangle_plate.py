@@ -22,14 +22,14 @@ class TrianglePlate:
     def get_penalty_points(self):
         return self.penalty_points
 
-    def add(self, i, new_tile_type: TileType, number_of_tiles):
-        current_tile = self.grids[i]
-        if current_tile.quantity < i and (
+    def add(self, row_to_add, new_tile_type: TileType, number_of_tiles):
+        current_tile = self.grids[row_to_add]
+        if current_tile.quantity < row_to_add and (
                 current_tile.type == TileType.NONE or current_tile.type == new_tile_type):
-            if number_of_tiles + current_tile.quantity > i:
-                number_of_bricks_exceeded = number_of_tiles + current_tile.quantity - i
+            if number_of_tiles + current_tile.quantity > row_to_add:
+                number_of_bricks_exceeded = number_of_tiles + current_tile.quantity - row_to_add
                 current_tile.type = new_tile_type
-                current_tile.quantity = i
+                current_tile.quantity = row_to_add
                 self.put_onto_penalty_bench(number_of_bricks_exceeded)
             else:
                 current_tile.type = new_tile_type
