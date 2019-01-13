@@ -42,12 +42,14 @@ class TestAiPlayer(TestCase):
     def test_find_next_move(self):
         result = self.ai_player.find_next_move()
         print(result)
-        self.assertEqual(result[0], 1)
-        self.assertEqual(result[1], int(TileType.YELLOW))
-        self.assertEqual(result[2], 3)
+        self.assertEqual(result[0], 2)
+        self.assertEqual(result[1], 1)
+        self.assertEqual(result[2], int(TileType.YELLOW))
+        self.assertEqual(result[3], 3)
 
     def test_get_most_tiles(self):
         result = self.ai_player.get_most_tiles()
         print(result)
-        self.assertEqual(result[0], int(TileType.YELLOW))
-        self.assertEqual(result[1], 3)
+        self.assertEqual(result[0], 2)
+        self.assertEqual(result[1], int(TileType.YELLOW))
+        self.assertEqual(result[2], 3)

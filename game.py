@@ -19,24 +19,25 @@ class Game:
 
     def play_game(self):
         self.az_table.fill_boxes()
-        self.print_table()
         while not self.last_round:
+            print(self.az_table.round_boxes)
+            self.az_table.print_table()
             if self.az_table.has_tile():
                 for player in self.players:
                     if self.az_table.has_tile():
-                        used_tile = player.play()
-                        self.az_table.adjust_fetched_tiles(used_tile[0], used_tile[1], used_tile[2])
+                        player.play()
                     else:
                         break
 
             for player in self.players:
-                self.last_round = player.is_last_round()
-
-            if not self.last_round:
-                self.az_table.fill_boxes()
+                if player.is_last_round():
+                    self.last_round = player.is_last_round()
 
             for player in self.players:
                 player.move_tiles_to_board()
+
+            if not self.last_round and not self.az_table.has_tile():
+                self.az_table.fill_boxes()
 
         for player in self.players:
             player.calculate_scores_after_round()
@@ -45,20 +46,6 @@ class Game:
                 self.winner = player.name
 
         print("The winner is %s" % self.winner)
-
-    def print_table(self):
-        switcher = {
-            1: "B",
-            2: "Y",
-            3: "R",
-            4: "K",
-            5: "W",
-        }
-        for box_number in range(5):
-            tiles = " %d --- " % box_number
-            for tile_number in range(4):
-                tiles += " %s" % switcher[self.az_table.round_boxes[box_number][tile_number]]
-            print(tiles)
 
 
 if __name__ == '__main__':

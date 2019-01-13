@@ -55,16 +55,14 @@ class Table:
                 number_of_tiles_by_colors[tile_type] += 1
                 tiles.append(tile_type)
             self.round_boxes[i] = tiles
-            self.round_boxes_by_color.append(number_of_tiles_by_colors)
-            self.sort_tiles_by_number(number_of_tiles_by_colors)
+            self.round_boxes_by_color[i] = number_of_tiles_by_colors
+            self.sort_tiles_by_number(i, number_of_tiles_by_colors)
 
-    def sort_tiles_by_number(self, tiles_by_colors):
-        for number_to_sort in range(5, 0, -1):
-            sorted_number_by_color = []
-            for color in tiles_by_colors.keys():
-                if tiles_by_colors[color] == number_to_sort:
-                    sorted_number_by_color.append(color)
-            self.round_boxes_by_number.append({number_to_sort: sorted_number_by_color})
+    def sort_tiles_by_number(self, row, tiles_by_colors):
+        for color in tiles_by_colors.keys():
+            if tiles_by_colors[color] > 0:
+                number_to_sort = tiles_by_colors[color]
+                self.round_boxes_by_number[row][number_to_sort].append(color)
 
     def adjust_fetched_tiles(self, box_fetched, tile_type_fetched: TileType, number_fetched):
         number_in_round_box = self.round_boxes_by_color[box_fetched][int(tile_type_fetched)]
@@ -87,3 +85,18 @@ class Table:
             if self.pool[tile_type] > 0:
                 return True
         return False
+
+    def print_table(self):
+        switcher = {
+            0: " ",
+            1: "B",
+            2: "Y",
+            3: "R",
+            4: "K",
+            5: "W",
+        }
+        for box_number in range(5):
+            tiles = " %d --- " % box_number
+            for tile_number in range(4):
+                tiles += " %s" % switcher[self.round_boxes[box_number][tile_number]]
+            print(tiles)

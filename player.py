@@ -40,7 +40,7 @@ class Player:
         destination_row = int(input("Which row you want to put into?"))
 
         self.az_plate.add(destination_row, switcher[color], amount)
-        return source_row, switcher[color], amount
+        self.az_table.adjust_fetched_tiles(source_row, switcher[color], amount)
 
     def is_last_round(self):
         return self.az_board.has_one_full_row()
