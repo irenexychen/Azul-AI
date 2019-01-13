@@ -50,7 +50,7 @@ class TrianglePlate:
             self.penalty_points = self.penalty_points + self.penalty_rule[i]
 
     def get_empty_row(self):
-        for row in range(1, 5):
+        for row in range(1, 6):
             if self.grids[row].quantity == 0:
                 return row
         return -1
@@ -60,3 +60,11 @@ class TrianglePlate:
             if self.grids[row].quantity < row:
                 return row
         return -1
+
+    def print_plate(self):
+        for row_number in range(1, 6):
+            tiles = " %d --- %s Amount: %d" % \
+                    (row_number, self.grids[row_number].type, self.grids[row_number].quantity)
+            print(tiles)
+        print("Penalty Bench:", self.penalty_bench)
+        print("------------------------------")

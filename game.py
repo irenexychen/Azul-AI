@@ -11,8 +11,8 @@ class Game:
 
     def __init__(self):
         self.az_table = Table()
-        self.az_player = Player(self.az_table)
-        self.ai_player = AiPlayer(self.az_table)
+        self.az_player = Player("MyPlayer", self.az_table)
+        self.ai_player = AiPlayer("AiPlayer", self.az_table)
         self.players.append(self.az_player)
         self.players.append(self.ai_player)
         self.ai_player.get_opponents(self.players)
@@ -20,11 +20,11 @@ class Game:
     def play_game(self):
         self.az_table.fill_boxes()
         while not self.last_round:
-            print(self.az_table.round_boxes)
             self.az_table.print_table()
             if self.az_table.has_tile():
                 for player in self.players:
                     if self.az_table.has_tile():
+                        print("Player = %s" % player.name)
                         player.play()
                     else:
                         break

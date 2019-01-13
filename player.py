@@ -10,7 +10,8 @@ class Player:
     id = ""
     scores = 0
 
-    def __init__(self, table: Table):
+    def __init__(self, name, table: Table):
+        self.name = name
         self.id = str(uuid.uuid4())
         self.az_board = Board()
         self.az_plate = TrianglePlate()
@@ -32,7 +33,7 @@ class Player:
             "k": TileType.BLACK,
             "w": TileType.WHITE
         }
-        source_row = int(input("From which row you want to take tiles?"))
+        source_row = int(input("From which round box you want to take tiles?"))
         color = input("What color you want to choose, Blue, Yellow, Red, blacK or White?")
         print("Box by color:", self.az_table.round_boxes_by_color[source_row])
         amount = self.az_table.round_boxes_by_color[source_row][int(switcher[color])]
@@ -41,6 +42,7 @@ class Player:
 
         self.az_plate.add(destination_row, switcher[color], amount)
         self.az_table.adjust_fetched_tiles(source_row, switcher[color], amount)
+        self.az_plate.print_plate()
 
     def is_last_round(self):
         return self.az_board.has_one_full_row()

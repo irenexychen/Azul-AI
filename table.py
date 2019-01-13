@@ -87,6 +87,11 @@ class Table:
         return False
 
     def print_table(self):
+        self.print_round_box()
+        self.print_pool()
+
+    def print_round_box(self):
+        print("Round box:", self.round_boxes)
         switcher = {
             0: " ",
             1: "B",
@@ -100,3 +105,6 @@ class Table:
             for tile_number in range(4):
                 tiles += " %s" % switcher[self.round_boxes[box_number][tile_number]]
             print(tiles)
+
+    def print_pool(self):
+        print("Pool:", self.pool)
