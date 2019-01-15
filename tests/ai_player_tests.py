@@ -6,7 +6,7 @@ from tile_type import TileType
 
 class TestAiPlayer(TestCase):
     az_table = Table()
-    ai_player = AiPlayer(az_table)
+    ai_player = AiPlayer("TestAiPlayer", az_table)
 
     ai_player.az_table.round_boxes = [[int(TileType.WHITE), int(TileType.WHITE), int(TileType.BLACK),
                                        int(TileType.YELLOW)],
@@ -41,15 +41,17 @@ class TestAiPlayer(TestCase):
 
     def test_find_next_move(self):
         result = self.ai_player.find_next_move()
-        print(result)
-        self.assertEqual(result[0], 2)
-        self.assertEqual(result[1], 1)
-        self.assertEqual(result[2], int(TileType.YELLOW))
-        self.assertEqual(result[3], 3)
+        result.print_tiles()
+
+        self.assertEqual(result.source_box, 2)
+        self.assertEqual(result.destination_row, 1)
+        self.assertEqual(result.type, int(TileType.YELLOW))
+        self.assertEqual(result.quantity, 3)
 
     def test_get_most_tiles(self):
-        result = self.ai_player.get_most_tiles()
-        print(result)
-        self.assertEqual(result[0], 2)
-        self.assertEqual(result[1], int(TileType.YELLOW))
-        self.assertEqual(result[2], 3)
+        result = self.ai_player.get_most_tiles_from_box()
+        result.print_tiles()
+
+        self.assertEqual(result.source_box, 2)
+        self.assertEqual(result.type, int(TileType.YELLOW))
+        self.assertEqual(result.quantity, 3)

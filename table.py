@@ -65,6 +65,12 @@ class Table:
                 self.round_boxes_by_number[row][number_to_sort].append(color)
 
     def adjust_fetched_tiles(self, box_fetched, tile_type_fetched: TileType, number_fetched):
+        if box_fetched == -1:
+            self.adjust_fetched_from_pool(tile_type_fetched)
+        else:
+            self.adjust_fetched_from_box(box_fetched, tile_type_fetched, number_fetched)
+
+    def adjust_fetched_from_box(self, box_fetched, tile_type_fetched: TileType, number_fetched):
         number_in_round_box = self.round_boxes_by_color[box_fetched][int(tile_type_fetched)]
         for j in range(4):
             self.round_boxes[box_fetched][j] = int(TileType.NONE)
@@ -75,6 +81,9 @@ class Table:
         self.round_boxes_by_number[box_fetched] = {4: [], 3: [], 2: [], 1: []}
 
         self.pool[tile_type_fetched] += number_in_round_box - number_fetched
+
+    def adjust_fetched_from_pool(self, tile_type_fetched: TileType):
+        self.pool[tile_type_fetched] = 0
 
     def has_tile(self):
         for i in range(5):

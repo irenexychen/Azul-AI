@@ -33,7 +33,7 @@ class Player:
             "k": TileType.BLACK,
             "w": TileType.WHITE
         }
-        source_row = int(input("From which round box you want to take tiles?"))
+        source_row = int(input("From which round box, pool(-1) you want to take tiles?"))
         color = input("What color you want to choose, Blue, Yellow, Red, blacK or White?")
         print("Box by color:", self.az_table.round_boxes_by_color[source_row])
         amount = self.az_table.round_boxes_by_color[source_row][int(switcher[color])]

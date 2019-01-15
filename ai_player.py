@@ -1,5 +1,6 @@
 from player import Player
 from tile_type import TileType
+from used_tile import UsedTile
 
 
 class AiPlayer(Player):
@@ -19,8 +20,8 @@ class AiPlayer(Player):
             5: TileType.WHITE,
         }
         tile_to_move = self.find_next_move()
-        self.az_plate.add(tile_to_move[1], switcher[tile_to_move[2]], tile_to_move[3])
-        self.az_table.adjust_fetched_tiles(tile_to_move[0], switcher[tile_to_move[2]], tile_to_move[3])
+        self.az_plate.add(tile_to_move.destination_row, switcher[tile_to_move.type], tile_to_move.quantity)
+        self.az_table.adjust_fetched_tiles(tile_to_move.source_box, switcher[tile_to_move.type], tile_to_move.quantity)
         self.az_plate.print_plate()
 
     def find_next_move(self):
@@ -30,19 +31,33 @@ class AiPlayer(Player):
         if row == -1:
             row = self.az_plate.get_partial_filled_row()
         # Find tiles
-        tiles = self.get_most_tiles()
-        # TODO if not find a row, set 9?
-        return tiles[0], row, tiles[1], tiles[2]
+        tiles = self.get_most_tiles_from_pool()
+        # TODO this is the spot to apply AI and searching algorithm
+        if tiles.quantity == 0:
+            tiles = self.get_most_tiles_from_box()
+        tiles.destination_row = row
+        return tiles
 
-    def get_most_tiles(self):
-        tiles = []
+    def get_most_tiles_from_box(self):
         amount = 0
+        tile_to_fetch: UsedTile
         for number_of_tiles in range(4, 0, -1):
             for k in range(5):
                 if len(self.az_table.round_boxes_by_number[k][number_of_tiles]) > 0:
                     tiles = self.az_table.round_boxes_by_number[k][number_of_tiles]
                     amount = number_of_tiles
+                    tile_to_fetch = UsedTile(k, tiles[0], amount)
                     break
             if amount > 0:
                 break
-        return k, tiles[0], amount
+        return tile_to_fetch
+
+    def get_most_tiles_from_pool(self):
+        amount_to_fetch = 0
+        found = False
+        for color in self.az_table.pool.keys():
+            if self.az_table.pool[color] > amount_to_fetch:
+                amount_to_fetch = self.az_table.pool[color]
+                found = True
+                break
+        return UsedTile(-1, color, amount_to_fetch) if found else UsedTile(-1, color, amount_to_fetch)
