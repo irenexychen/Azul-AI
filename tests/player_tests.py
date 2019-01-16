@@ -1,12 +1,11 @@
 from unittest import TestCase
 from player import Player
+from table import Table
 
 
 class TestPlayer(TestCase):
-    guest_player = Player()
-
-    def test_play(self):
-        self.fail()
+    test_table = Table()
+    guest_player = Player("TestUser",test_table)
 
     def test_is_last_round(self):
         self.fail()
