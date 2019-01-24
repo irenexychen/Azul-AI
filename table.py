@@ -64,15 +64,25 @@ class Table:
                 number_to_sort = tiles_by_colors[color]
                 self.round_boxes_by_number[row][number_to_sort].append(color)
 
-    def adjust_fetched_tiles(self, box_fetched, tile_type_fetched: TileType, number_fetched):
+    def adjust_fetched_tiles(self, box_fetched, tile_type_fetched: TileType):
         if box_fetched == -1:
             self.adjust_fetched_from_pool(tile_type_fetched)
         else:
-            self.adjust_fetched_from_box(box_fetched, tile_type_fetched, number_fetched)
+            self.adjust_fetched_from_box(box_fetched, tile_type_fetched)
 
-    def adjust_fetched_from_box(self, box_fetched, tile_type_fetched: TileType, number_fetched):
-        number_in_round_box = self.round_boxes_by_color[box_fetched][int(tile_type_fetched)]
+    def adjust_fetched_from_box(self, box_fetched, tile_type_fetched: TileType):
+        switcher = {
+            1: TileType.BLUE,
+            2: TileType.YELLOW,
+            3: TileType.RED,
+            4: TileType.BLACK,
+            5: TileType.WHITE
+        }
+        left_in_round_box = []
         for j in range(4):
+            left_color = self.round_boxes[box_fetched][j]
+            if left_color != tile_type_fetched:
+                left_in_round_box.append(left_color)
             self.round_boxes[box_fetched][j] = int(TileType.NONE)
 
         self.round_boxes_by_color[box_fetched] = {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0,
@@ -80,7 +90,8 @@ class Table:
 
         self.round_boxes_by_number[box_fetched] = {4: [], 3: [], 2: [], 1: []}
 
-        self.pool[tile_type_fetched] += number_in_round_box - number_fetched
+        for color in left_in_round_box:
+            self.pool[switcher[color]] += 1
 
     def adjust_fetched_from_pool(self, tile_type_fetched: TileType):
         self.pool[tile_type_fetched] = 0
@@ -100,7 +111,7 @@ class Table:
         self.print_pool()
 
     def print_round_box(self):
-        print("Round box:", self.round_boxes)
+        # print("Round box:", self.round_boxes)
         switcher = {
             0: " ",
             1: "B",

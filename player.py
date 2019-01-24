@@ -36,12 +36,17 @@ class Player:
         source_row = int(input("From which round box, pool(-1) you want to take tiles?"))
         color = input("What color you want to choose, Blue, Yellow, Red, blacK or White?")
         print("Box by color:", self.az_table.round_boxes_by_color[source_row])
-        amount = self.az_table.round_boxes_by_color[source_row][int(switcher[color])]
+
+        if source_row == -1:
+            amount = self.az_table.pool[switcher[color]]
+        else:
+            amount = self.az_table.round_boxes_by_color[source_row][int(switcher[color])]
+
         print("You toke %d %s" % (amount, switcher[color]))
         destination_row = int(input("Which row you want to put into?"))
 
         self.az_plate.add(destination_row, switcher[color], amount)
-        self.az_table.adjust_fetched_tiles(source_row, switcher[color], amount)
+        self.az_table.adjust_fetched_tiles(source_row, switcher[color])
         self.az_plate.print_plate()
 
     def is_last_round(self):

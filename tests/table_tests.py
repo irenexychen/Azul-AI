@@ -32,7 +32,7 @@ class TestTable(TestCase):
             {int(TileType.BLUE): 0, int(TileType.BLACK): 0, int(TileType.RED): 0, int(TileType.WHITE): 0,
              int(TileType.YELLOW): 0}, ]
 
-        game_table.adjust_fetched_tiles(2, TileType.YELLOW, 2)
+        game_table.adjust_fetched_tiles(2, TileType.YELLOW)
 
         self.assertEqual(game_table.round_boxes[2][0], int(TileType.NONE))
         self.assertEqual(game_table.round_boxes[2][1], int(TileType.NONE))
@@ -42,7 +42,8 @@ class TestTable(TestCase):
         self.assertLess(len(game_table.round_boxes_by_number[2][1]), 1)
         self.assertEqual(game_table.round_boxes_by_color[2][int(TileType.RED)], 0)
 
-        self.assertEqual(game_table.pool[TileType.YELLOW], 1)
+        self.assertEqual(game_table.pool[TileType.YELLOW], 0)
+        self.assertEqual(game_table.pool[TileType.RED], 1)
 
         self.assertIs(game_table.has_tile(), True)
 

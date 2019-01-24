@@ -26,6 +26,7 @@ class Game:
                     if self.az_table.has_tile():
                         print("Player = %s" % player.name)
                         player.play()
+                        self.az_table.print_table()
                     else:
                         break
 

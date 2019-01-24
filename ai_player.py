@@ -21,7 +21,7 @@ class AiPlayer(Player):
         }
         tile_to_move = self.find_next_move()
         self.az_plate.add(tile_to_move.destination_row, switcher[tile_to_move.type], tile_to_move.quantity)
-        self.az_table.adjust_fetched_tiles(tile_to_move.source_box, switcher[tile_to_move.type], tile_to_move.quantity)
+        self.az_table.adjust_fetched_tiles(tile_to_move.source_box, switcher[tile_to_move.type])
         self.az_plate.print_plate()
 
     def find_next_move(self):
