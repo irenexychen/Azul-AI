@@ -18,3 +18,13 @@ Using neural networks to master the tile-laying game of Azul.
  Note:
  ### Refer to the coding style from
  *https://github.com/google/styleguide/blob/gh-pages/pyguide.md*
+ 
+ 
+ ## NEXT STEPS:
+ - populate game_format.py with data
+ - implement model_run.py to train with keras 
+ - implement simulate_game.py to run model.py and simulate a game between two bots
+ - implement scoring.py to score games made by simulate_game.py
+ 
+ will possibly need to implement a processing python script?
+ 
