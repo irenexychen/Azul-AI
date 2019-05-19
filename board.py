@@ -3,16 +3,20 @@ from tile import Tile
 # board wall, belongs to player
 # x row
 # y column
-# ROWWEIGHT helps simulate triangles 
+# ROWWEIGHT helps simulate triangles
 
 class Board:
-	BOARDMAPPING = [[Tile.BLUE, Tile.CHEESE, Tile.FIRE, Tile.BLACK, Tile.SNOW],[Tile.SNOW, Tile.BLUE, Tile.CHEESE, Tile.FIRE, Tile.BLACK],[Tile.BLACK, Tile.SNOW, Tile.BLUE, Tile.CHEESE, Tile.FIRE],[Tile.FIRE, Tile.BLACK, Tile.SNOW,Tile.BLUE, Tile.CHEESE],[Tile.CHEESE, Tile.FIRE, Tile.BLACK, Tile.SNOW, Tile.BLUE]]
+	BOARDMAPPING = [[Tile.BLUE   , Tile.CHEESE , Tile.FIRE   , Tile.BLACK  , Tile.SNOW ],
+					[Tile.SNOW   , Tile.BLUE   , Tile.CHEESE , Tile.FIRE   , Tile.BLACK ],
+					[Tile.BLACK  , Tile.SNOW   , Tile.BLUE   , Tile.CHEESE , Tile.FIRE  ],
+					[Tile.FIRE   , Tile.BLACK  , Tile.SNOW   , Tile.BLUE   , Tile.CHEESE],
+					[Tile.CHEESE , Tile.FIRE   , Tile.BLACK  , Tile.SNOW   , Tile.BLUE] ]
 	TILEMAPPING = {
-		Tile.BLUE: [(0,0), (1,1), (2,2), (3,3), (4,4)],     
-		Tile.CHEESE: 
-		Tile.FIRE:
-		Tile.BLACK:
-		Tile.SNOW:
+		Tile.BLUE:		[(0,0), (1,1), (2,2), (3,3), (4,4)],
+		Tile.CHEESE:	[(0,1), (1,2), (2,3), (3,4), (4,0)],
+		Tile.FIRE:		[(0,2), (1,3), (2,4), (3,0), (4,1)],
+		Tile.BLACK:		[(0,3), (1,4), (2,0), (3,1), (4,2)],
+		Tile.SNOW:		[(0,4), (1,0), (2,1), (3,2), (4,3)]
 	}
 	ROWWEIGHT = [1,2,3,4,5]
 
@@ -39,7 +43,7 @@ class Board:
 		for r in self.board:
 			i = 0
 			while (game_end == False and i <= 4 and r[i] == 1):
-				if i == 4: 
+				if i == 4:
 					game_end = True
 					break
 				else:
@@ -49,5 +53,5 @@ class Board:
 
 
 	def calculate_score(self):
-		
+
 
