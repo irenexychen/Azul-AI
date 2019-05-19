@@ -46,8 +46,21 @@ class Board:
 					i += 1
 		return game_end;
 
-
-
 	def calculate_score(self):
-		
+		for x in range(5):
+			for y in range(5):
+				if self.board_container[x][y] != self.prev_board_state[x][y]:
 
+ 
+	def calculate_bonus_score(self):
+		for r in self.board_container
+
+
+
+	def _traverse_row(self, x, y):
+		score = 0
+		while (x >= 0):
+			score += self.board_container[x][y]
+
+		return
+	def _traverse_col(self):

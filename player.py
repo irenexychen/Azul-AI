@@ -8,9 +8,6 @@ class Player:
 		self.board = Board()
 		self.score = 0
 
-
-
-
 	def play_turn(self, grabbed_tiles, row):
 		# list of grabbed tiles to set
 		num_tiles = len(grabbed_tiles)
@@ -19,4 +16,11 @@ class Player:
 
 		self.board.set_tile()
 
+	def is_finished():
+		return self.board.check_fullrow()
 
+	def get_score():
+		return self.board.calculate_score()
+
+	def get_final_score():
+		return self.board.calculate_score() + self.board.calculate_bonus_score()
