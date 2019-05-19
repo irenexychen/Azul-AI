@@ -20,12 +20,12 @@ discard = {
 }
 
 class Pool:
-	def __init__(self):
+	def __init__(self, num_factories, tiles_per_factory):
 		global bag
 		global discard
 
-		self.num_factories = 5
-		self.tiles_per_factory = 4
+		self.num_factories = num_factories
+		self.tiles_per_factory = tiles_per_factory
 		self.middle = [Tile.NULL]
 		self.factories = []
 
@@ -66,6 +66,13 @@ class Pool:
 			self.factories[loc - 1] = []
 
 		return grabbed_tiles
+
+	# add tiles to discard pile
+	def add_to_discard(self, discarded_tiles):
+		global discard
+
+		for tile in discarded_tiles:
+			discard[tile] += 1
 
 	# determines if the pool is empty
 	def is_empty(self):
