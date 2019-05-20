@@ -19,7 +19,7 @@ class Game:
 		self.players = []
 		self.pool = None
 		for i in range(self.num_players):
-			players.append(Player("Player {}".format(i)))
+			self.players.append(Player("Player {}".format(i)))
 
 	def play_game(self):
 		while not self.end_game:
@@ -56,7 +56,7 @@ class Game:
 				if score > self.max_score:
 					self.max_score = score
 					self.winning_player = player
-				elif: score = self.max_score:
+				elif score == self.max_score:
 					self.winning_player = None
 
 				discarded_tiles = player.get_discared_tiles()
@@ -71,7 +71,7 @@ class Game:
 			if score > self.max_score:
 				self.max_score = score
 				self.winning_player = player
-			elif: score = self.max_score:
+			elif score == self.max_score:
 				self.winning_player = None
 
 		if self.winning_player:

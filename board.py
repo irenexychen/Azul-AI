@@ -6,13 +6,13 @@ from tile import Tile
 # ROWWEIGHT helps simulate triangles
 
 class Board:
-	BOARDMAPPING = [[Tile.BLUE   , Tile.CHEESE , Tile.FIRE   , Tile.BLACK  , Tile.SNOW ],
-					[Tile.SNOW   , Tile.BLUE   , Tile.CHEESE , Tile.FIRE   , Tile.BLACK ],
-					[Tile.BLACK  , Tile.SNOW   , Tile.BLUE   , Tile.CHEESE , Tile.FIRE  ],
-					[Tile.FIRE   , Tile.BLACK  , Tile.SNOW   , Tile.BLUE   , Tile.CHEESE],
-					[Tile.CHEESE , Tile.FIRE   , Tile.BLACK  , Tile.SNOW   , Tile.BLUE] ]
+	BOARDMAPPING = [[Tile.WATER   , Tile.CHEESE , Tile.FIRE   , Tile.BLACK  , Tile.SNOW ],
+					[Tile.SNOW   , Tile.WATER   , Tile.CHEESE , Tile.FIRE   , Tile.BLACK ],
+					[Tile.BLACK  , Tile.SNOW   , Tile.WATER   , Tile.CHEESE , Tile.FIRE  ],
+					[Tile.FIRE   , Tile.BLACK  , Tile.SNOW   , Tile.WATER   , Tile.CHEESE],
+					[Tile.CHEESE , Tile.FIRE   , Tile.BLACK  , Tile.SNOW   , Tile.WATER] ]
 	TILEMAPPING = {
-		Tile.BLUE:		[(0,0), (1,1), (2,2), (3,3), (4,4)],
+		Tile.WATER:		[(0,0), (1,1), (2,2), (3,3), (4,4)],
 		Tile.CHEESE:	[(0,1), (1,2), (2,3), (3,4), (4,0)],
 		Tile.FIRE:		[(0,2), (1,3), (2,4), (3,0), (4,1)],
 		Tile.BLACK:		[(0,3), (1,4), (2,0), (3,1), (4,2)],
@@ -67,7 +67,7 @@ class Board:
 			for y in range(5):
 				if (r[y] != 1):
 					break
-				else if (y == 4):
+				elif (y == 4):
 					num_fullrows += 1
 		
 		# full cols bonus
@@ -78,7 +78,7 @@ class Board:
 
 		# same type bonus
 		tiletype_tally = {
-				Tile.BLUE: 0,
+				Tile.WATER: 0,
 				Tile.CHEESE: 0,
 				Tile.FIRE: 0,
 				Tile.BLACK:	0,
