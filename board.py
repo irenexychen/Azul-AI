@@ -29,10 +29,11 @@ class Board:
 		return self.BOARDMAPPING[x][y]
 
 	def tile_mapping(self, tile_type, row):
-		return self.TILEMAPPING[tile_type][row]
+		return self.TILEMAPPING[tile_type][row][1]
 
 	def set_tile(self, tile_type, num_tiles, row):
-		col = tile_mapping(tile_type, row)
+		penalty = 0
+		col = self.tile_mapping(tile_type, row)
 		if num_tiles >= self.ROWWEIGHT[row]:
 			self.board_container[row][col] = 1
 			penalty = num_tiles - self.ROWWEIGHT[row]
@@ -42,7 +43,7 @@ class Board:
 
 	def check_fullrow(self):
 		game_end = False
-		for r in self.board:
+		for r in self.board_container:
 			i = 0
 			while (game_end == False and i <= 4 and r[i] == 1):
 				if i == 4:
@@ -70,11 +71,11 @@ class Board:
 					break
 				elif (y == 4):
 					num_fullrows += 1
-		
+
 		# full cols bonus
 		num_fullcols = 0
 		for i in range(5):
-			if _traverse_col(0,i) == 5:
+			if self._traverse_col(0,i) == 5:
 				num_fullcols += 1
 
 		# same type bonus
@@ -88,9 +89,9 @@ class Board:
 		for i in range(5):
 			for j in range(5):
 				tiletype_tally[self.board_mapping(i,j)] += 1
-				
+
 		num_fulltypes = 0
-		for k, v in tiletype_tally:
+		for v in tiletype_tally.values():
 			if (v == 5):
 				num_fulltypes += 1
 
@@ -99,7 +100,7 @@ class Board:
 	def _traverse_row(self, x, y):
 		score = 1
 		i = x - 1
-		while (i >= 0 and self.board_container[i][y] == 1): 
+		while (i >= 0 and self.board_container[i][y] == 1):
 			score += self.board_container[i][y]
 			i -= 1
 		i = x + 1
@@ -111,7 +112,7 @@ class Board:
 	def _traverse_col(self, x, y):
 		score = 1
 		j = y - 1
-		while (i >= 0 and self.board_container[x][j] == 1): 
+		while (j >= 0 and self.board_container[x][j] == 1):
 			score += self.board_container[x][j]
 			j -= 1
 		j = y + 1

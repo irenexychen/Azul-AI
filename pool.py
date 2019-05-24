@@ -33,7 +33,9 @@ class Pool:
 			self.factories.append([])
 			for t in range(self.tiles_per_factory):
 				# replace bag with discard if empty
-				if (sum(bag.values()) == 0):
+				print(sum(bag.values()))
+				print(bag[Tile.FIRE] + bag[Tile.WATER] + bag[Tile.CHEESE] + bag[Tile.BLACK] + bag[Tile.SNOW])
+				if sum(bag.values()) == 0:
 					temp = bag
 					bag = discard
 					discard = temp
@@ -70,9 +72,11 @@ class Pool:
 	# add tiles to discard pile
 	def add_to_discard(self, discarded_tiles):
 		global discard
-
+		print("ADDING TO DISCARD: {}".format(len(discarded_tiles)))
+		print(discarded_tiles)
 		for tile in discarded_tiles:
 			discard[tile] += 1
+		print(discard)
 
 	# determines if the pool is empty
 	def is_empty(self):
