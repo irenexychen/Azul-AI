@@ -33,6 +33,23 @@ class Board:
 	def tile_mapping(self, tile_type, row):
 		return self.TILEMAPPING[tile_type][row][1]
 
+	def where_put(self, tile_type):
+		avail = []
+		for i in range(5):
+			yes = True
+			for j in range(5):
+				el = self.board_container[i][j]
+				if self.board_mapping([i][j]) != tile_type:
+					if el > 0 and math.floor(el + 0.00001) != 1:
+						yes = False
+				else:
+					if math.floor(el + 0.00001) == 1:
+						yes = False
+			if yes:
+				avail.append(i)
+		return avail
+
+
 	def set_tile(self, tile_type, num_tiles, row):
 		penalty = 0
 		col = self.tile_mapping(tile_type, row)
