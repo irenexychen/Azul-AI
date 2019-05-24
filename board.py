@@ -23,8 +23,8 @@ class Board:
 	ROWWEIGHT = [1,2,3,4,5]
 
 	def __init__(self):
-		self.board_container = [[0] * 5,] * 5
-		self.prev_board_state = [[0] * 5,] * 5
+		self.board_container = [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
+		self.prev_board_state = [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
 		self.score = 0
 
 	def board_mapping(self, x, y):
@@ -40,7 +40,7 @@ class Board:
 			self.board_container[row][col] = 1
 			penalty = num_tiles - self.ROWWEIGHT[row]
 		else:
-			self.board_container[row][col] += num_tiles / self.ROWWEIGHT[row]
+			self.board_container[row][col] += (num_tiles / self.ROWWEIGHT[row])
 		return penalty
 
 	def check_fullrow(self):

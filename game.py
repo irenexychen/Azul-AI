@@ -22,10 +22,10 @@ class Game:
 			self.players.append(Player("Player {}".format(i + 1)))
 
 	def play_game(self):
-		round_num = 0
+		round_num = 1
 		while not self.end_game:
 			taken = set()
-			cycle = 0
+			cycle = 1
 
 			print("#################### ROUND {} #####################\n".format(round_num))
 			self.pool = Pool(self.num_factories, self.tiles_per_factory)

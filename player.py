@@ -39,7 +39,8 @@ class Player:
 			else:
 				penalty_score += 3
 		self.penalty = 0
-		return round(self.board.calculate_score() - penalty_score)
+		self.score += round(self.board.calculate_score() - penalty_score)
+		return self.score
 
 	def get_final_score(self):
 		return round(self.get_score() + self.board.calculate_bonus_score())
