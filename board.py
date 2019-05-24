@@ -11,7 +11,7 @@ class Board:
 					[Tile.BLACK  , Tile.SNOW   , Tile.WATER   , Tile.CHEESE , Tile.FIRE  ],
 					[Tile.FIRE   , Tile.BLACK  , Tile.SNOW   , Tile.WATER   , Tile.CHEESE],
 					[Tile.CHEESE , Tile.FIRE   , Tile.BLACK  , Tile.SNOW   , Tile.WATER] ]
-	
+
 	TILEMAPPING = {
 		Tile.WATER:		[(0,0), (1,1), (2,2), (3,3), (4,4)],
 		Tile.CHEESE:	[(0,1), (1,2), (2,3), (3,4), (4,0)],
@@ -19,14 +19,13 @@ class Board:
 		Tile.BLACK:		[(0,3), (1,4), (2,0), (3,1), (4,2)],
 		Tile.SNOW:		[(0,4), (1,0), (2,1), (3,2), (4,3)]
 	}
-	
+
 	ROWWEIGHT = [1,2,3,4,5]
 
 	def __init__(self):
 		self.board_container = [[0] * 5,] * 5
 		self.prev_board_state = [[0] * 5,] * 5
 		self.score = 0
-		self.penalty_row = []
 
 	def board_mapping(self, x, y):
 		return self.BOARDMAPPING[x][y]
@@ -60,8 +59,6 @@ class Board:
 		for x in range(5):
 			for y in range(5):
 				if self.board_container[x][y] != self.prev_board_state[x][y]:
-					# take one tile to place on board, put everything else in a discard list???
-					self.discarded.extend([self.board_mapping(x,y)] * x) #x = ROWWEIGHT[x] - 1
 					self.score += self._traverse_row(x,y)
 					self.score += self._traverse_col(x,y)
 			self.save_to_prev_board_state(x)
@@ -128,8 +125,3 @@ class Board:
 
 	def save_to_prev_board_state(self, row):
 		self.prev_board_state[row] = self.board_container[row]
-
-	def get_discarded_tiles(self):
-		discarded_tiles = self.discarded
-		self.discarded = []
-		return discarded_tiles

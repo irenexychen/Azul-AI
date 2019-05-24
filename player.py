@@ -12,9 +12,6 @@ class Player:
 		self.score = 0
 		self.penalty = 0
 
-		# TODO: don't discard everything
-		self.discard = []
-
 	def play_turn(self, grabbed_tiles, rng_play):
 		if (Tile.NULL in grabbed_tiles):
 			self.penalty += 1
@@ -28,7 +25,6 @@ class Player:
 				row = 0
 				# TODO: Implement custom play
 			self.penalty += self.board.set_tile(tile_type, num_tiles, row)
-			# self.discard.extend([tile_type for i in range(len(grabbed_tiles))])
 
 	def is_finished(self):
 		return self.board.check_fullrow()
@@ -42,9 +38,8 @@ class Player:
 				penalty_score += 2
 			else:
 				penalty_score += 3
-
-		return self.board.calculate_score() - penalty_score
+		self.penalty = 0
+		return round(self.board.calculate_score() - penalty_score)
 
 	def get_final_score(self):
-		return self.get_score() + self.board.calculate_bonus_score()
-
+		return round(self.get_score() + self.board.calculate_bonus_score())

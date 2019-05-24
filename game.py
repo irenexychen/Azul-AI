@@ -87,9 +87,6 @@ class Game:
 				elif score == self.max_score:
 					self.winning_player = None
 
-				discarded_tiles = player.discard
-				self.pool.add_to_discard(discarded_tiles)
-
 				self.end_game = self.end_game or player.is_finished()
 
 		print("#################### END OF GAME #####################\n")
