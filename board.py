@@ -28,15 +28,16 @@ class Board:
 	def board_mapping(self, x, y):
 		return self.BOARDMAPPING[x][y]
 
-	def tile_mapping(self, x, Tile):
-		return self.TILEMAPPING[x]
+	def tile_mapping(self, tile_type, row):
+		return self.TILEMAPPING[tile_type][row]
 
-	def set_tile(self, x, y, num_tiles):
-		if num_tiles >= self.ROWWEIGHT[x]:
-			self.board_container[x][y] = 1
-			penalty = num_tiles - self.ROWWEIGHT[x]
+	def set_tile(self, tile_type, num_tiles, row):
+		col = tile_mapping(tile_type, row)
+		if num_tiles >= self.ROWWEIGHT[row]:
+			self.board_container[row][col] = 1
+			penalty = num_tiles - self.ROWWEIGHT[row]
 		else:
-			self.board_container[x][y] += num_tiles / self.ROWWEIGHT[x]
+			self.board_container[row][col] += num_tiles / self.ROWWEIGHT[row]
 		return penalty
 
 	def check_fullrow(self):
@@ -57,7 +58,7 @@ class Board:
 				if self.board_container[x][y] != self.prev_board_state[x][y]:
 					self.score += self._traverse_row(x,y)
 					self.score += self._traverse_col(x,y)
-		self.save_to_prev_board_state()
+			self.save_to_prev_board_state(x)
 		return self.score
 
 	def calculate_bonus_score(self):
@@ -87,6 +88,7 @@ class Board:
 		for i in range(5):
 			for j in range(5):
 				tiletype_tally[self.board_mapping(i,j)] += 1
+				
 		num_fulltypes = 0
 		for k, v in tiletype_tally:
 			if (v == 5):
@@ -118,5 +120,5 @@ class Board:
 			j += 1
 		return score
 
-	def save_to_prev_board_state(self):
-		self.prev_board_state = self.board_container
+	def save_to_prev_board_state(self, row):
+		self.prev_board_state[row] = self.board_container[row]
