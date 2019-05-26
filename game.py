@@ -3,6 +3,9 @@ from pool import Pool
 from tile import Tile
 import utils
 
+import math
+
+
 class Game:
 	def __init__(self):
 		self.num_players = 2
@@ -27,15 +30,15 @@ class Game:
 			taken = set()
 			cycle = 1
 
-			print("#################### ROUND {} #####################\n".format(round_num))
+			print("#################### ROUND {} #####################".format(round_num))
 			self.pool = Pool(self.num_factories, self.tiles_per_factory)
 			while not self.end_round:
 				cycle += 1
-				print("#################### CYCLE {} #####################\n".format(cycle))
+				print("\n#################### CYCLE {} #####################".format(cycle))
 				for factory in self.pool.factories:
 					print(factory)
 				print(self.pool.middle)
-				print("#################### CYCLE {} #####################\n\n".format(cycle))
+				print("#################### CYCLE {} #####################\n".format(cycle))
 
 				for player in self.players:
 					while not self.pool.is_empty():
@@ -61,16 +64,15 @@ class Game:
 					print("{} took {} from factory {}".format(player.name, target_tile, f_index))
 
 					if Tile.NULL in grabbed_tiles:
-						print("{} is going first next round".format(player.name))
 						self.first_player = player
 
 					player.play_turn(grabbed_tiles, self.rng_play)
 
 					if self.pool.is_empty():
 						self.end_round = True
-						break;
+						break
 
-			print("#################### ROUND {} #####################\n".format(round_num))
+			print("\n#################### ROUND {} #####################".format(round_num))
 			round_num += 1
 
 			self.players.pop(self.players.index(self.first_player))
@@ -80,6 +82,10 @@ class Game:
 
 			for player in self.players:
 				score = player.get_score()
+				for i in player.board.board_container:
+					for j in i:
+						print(math.floor(j), end=' ')
+					print()
 				print("{} has {} points".format(player.name, score))
 				if score > self.max_score:
 					self.max_score = score
@@ -89,10 +95,14 @@ class Game:
 
 				self.end_game = self.end_game or player.is_finished()
 
-		print("#################### END OF GAME #####################\n")
+		print("\n#################### END OF GAME #####################")
 		scores = []
 		for player in self.players:
 			score = player.get_final_score()
+			for i in player.board.board_container:
+				for j in i:
+					print(math.floor(j), end=' ')
+				print()
 			print("{} has {} points".format(player.name, score))
 			scores.append(score)
 			if score > self.max_score:

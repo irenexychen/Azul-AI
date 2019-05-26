@@ -6,5 +6,5 @@ def random_factory(factory_index):
 def random_tile(factory):
 	return random.choice(factory)
 
-def random_row(num_rows):
-	return random.randint(0, num_rows - 1)
+def random_row(available_rows):
+	return random.choice(available_rows)
