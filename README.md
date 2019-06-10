@@ -1,3 +1,6 @@
+[![HitCount](http://hits.dwyl.io/irenexychen/Azul-AI.svg)](http://hits.dwyl.io/irenexychen/Azul-AI)
+
+
 # Azul-AI
 Using neural networks to master the tile-laying game of Azul. Exploring the applications of TD(λ) reinforcement learning to create an agent with possibly integrated human apriori knowledge to accelerate the sample inefficiency problem of RL. 
 
